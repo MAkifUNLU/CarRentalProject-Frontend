@@ -1,0 +1,78 @@
+ <!-- <div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>  -->
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<h5 class="text-center bg-dark rounded-top text-light mb-1 mt-1">
+  Araba Listesi
+</h5>
+<table class="table table-hover table-warning table-striped">
+  <thead>
+    <tr>
+      <th>Araç Adı</th>
+      <th>Renk </th>
+      <th>Model Yılı</th>
+      <th>Günlük Ücreti</th>
+      <th>Açılaması</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cars of cars" >
+      <td>{{ cars.carName }}</td>
+      <td>{{ cars.colorName }}</td>
+      <td>{{ cars.modelYear }}</td>
+      <td>{{ cars.dailyPrice }}</td>
+      <td>{{ cars.description }}</td>
+      <td>
+        <button
+          routerLink="/cars/{{ cars.carId }}"
+          type="button"
+          class="btn btn-success"
+        >
+          detay
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+ <div class="row">
+  <div *ngFor="let cars of cars" class="card" style="width: 18rem">
+    <img
+      *ngIf="cars.imagePath != null"
+      class="card-img-top"
+      src="https://localhost:44325/{{ cars.imagePath }}"
+      alt="Card image cap"
+    />
+    <img
+      *ngIf="cars.imagePath == null"
+      class="card-img-top"
+      src="https://localhost:44325/Images/default.jpg"
+      alt="Card image cap"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ cars.carName }}</h5>
+      <h6 class="card-text">{{ cars.dailyPrice }}</h6>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{ cars.brandName }}</li>
+      <li class="list-group-item">{{ cars.modelYear }}</li>
+      <li class="list-group-item">{{ cars.colorName }}</li>
+      <li class="list-group-item">{{ cars.description }}</li>
+    </ul>
+    <div class="card-body">
+      <a class="card-link"
+        ><button
+          routerLink="/cars/{{cars.carId}}"
+          type="button"
+          class="btn btn-success"
+        >
+          Detay Görüntüle
+        </button></a
+      >
+    </div>
+  </div>
+</div> 
