@@ -14,9 +14,10 @@ import { CarImageService } from 'src/app/services/carimage.service';
 })
 export class CarDetailComponent implements OnInit {
 
-  carDetails: CarDetail[] = []
+  carDetails: CarDetail[]=[];
   carImages: CarImage[] = [];
   cars: Car[] = [];
+  filterCarText = '';
   dataLoaded = false;
 
   constructor(private carService : CarService,
@@ -34,6 +35,7 @@ export class CarDetailComponent implements OnInit {
   }
   getCarDetailByCarId(carId: number) {
     this.carService.getCarDetailByCarId(carId).subscribe(response => {
+      console.log(response)
       this.carDetails = response.data;
       this.dataLoaded = true;
     })

@@ -1,35 +1,22 @@
-<!-- <ul  class="list-group">
-  <li class="list-group-item " routerLink="/cars" ><h6> Tüm Markalar</h6></li>
-  <li (click)="setCurrentBrand(brand)"
-  routerLink="cars/brands/{{brand.brandId}}"
-   [class]="getCurrentBrandClass(brand)" 
-    *ngFor="let brand of brands">{{brand.brandName}}</li>
+<ul class="list-group">
+  <li class="list-group-item bg-dark text-light list-group-item-action ">Markalar</li>
 
-</ul> -->
-<!-- <ul class="list-group">
-    <li class="list-group-item">An item</li>
-    <li class="list-group-item">A second item</li>
-    <li class="list-group-item">A third item</li>
-    <li class="list-group-item">A fourth item</li>
-    <li class="list-group-item">And a fifth one</li>
-  </ul>  -->
-  <ul class="list-group">
-    <li class="list-group-item bg-dark text-light">Markalar</li>
-    <li
-      [class]="getAllBrandClass()"
-      class="list-group-item-secondary"
-      routerLink="/cars"
-    >
-      Tüm Ürünler
-    </li>
-    <li
-      (click)="setCurrentBrand(brand)"
-      routerLink="/cars/brands/{{ brand.brandId }}"
-      *ngFor="let brand of brands"
-      [class]="getCurrentBrandClass(brand)"
-      class="list-group-item-secondary"
-    >
-      {{ brand.brandName }}
-    </li>
-  </ul>
-  
+  <div class="mb-1">
+    <label for="filterText" class="form-label"></label>
+    <input type="text" [(ngModel)]="filterBrandText" class="form-control" id="filterText" placeholder="marka ara">
+  </div>
+  <div *ngIf="filterBrandText" class="alert alert-success">
+    {{filterBrandText}} aradınız
+  </div>
+  <li class="list-group-item-secondary mb-1" [class]="getAllBrandClass()" routerLink="/cars">
+    Tüm Arabalar
+  </li>
+  <li (click)="setCurrentBrand(brand)" routerLink="/cars/brands/{{ brand.brandId }}"
+    *ngFor="let brand of brands  |filterBrand:filterBrandText" [class]="getCurrentBrandClass(brand)"
+    class="list-group-item-secondary mb-1">
+    {{ brand.brandName }}
+  </li>
+  <div class="mb-3">
+    <button class="btn btn-primary" routerLink="/brands">Marka Listesi</button>
+  </div>
+</ul>

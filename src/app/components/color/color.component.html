@@ -1,25 +1,22 @@
-<!-- <ul  class="list-group">
-  <li class="list-group-item" routerLink="cars" scope="col"><h6> Tüm Renkler</h6></li>
-  <li (click)="setCurrentColor(color)"
-  routerLink="cars/colors/{{color.colorId}}"
-   [class]="getCurrentColorClass(color)"
-   *ngFor="let color of colors"> {{color.colorName}}</li> 
-</ul> -->
 <ul class="list-group">
-  <li class="list-group-item bg-dark text-light list-group-item-action" >Renkler</li>
-    <li
-      class="list-group-item-secondary"
-      [class]="getAllColorClass()"
-     routerLink="/cars"
-    >
-    Tüm Ürünler
+  <li class="list-group-item bg-dark text-light list-group-item-action">Renkler</li>
+
+  <div class="mb-1">
+    <label for="filterText" class="form-label"></label>
+    <input type="text" [(ngModel)]="filterColorText" class="form-control" id="filterText" placeholder="renk ara">
+  </div>
+  <div *ngIf="filterColorText" class="alert alert-success">
+    {{filterColorText}} aradınız
+  </div>
+  <li class="list-group-item-secondary mb-1" [class]="getAllColorClass()" routerLink="/cars">
+    Tüm Arabalar
   </li>
-  <li
-    (click)="setCurrentColor(color)"
-    routerLink="/cars/colors/{{color.colorId}}"
-    *ngFor="let color of colors"
-    [class]="getCurrentColorClass(color)" class="list-group-item-secondary"
-  >
+  <li (click)="setCurrentColor(color)" routerLink="/cars/colors/{{color.colorId}}"
+    *ngFor="let color of colors  |filterColor:filterColorText" [class]="getCurrentColorClass(color)"
+    class="list-group-item-secondary mb-1">
     {{ color.colorName }}
   </li>
+  <div class="mb-3">
+    <button class="btn btn-primary" routerLink="/colors">Renk Listesi</button>
+  </div>
 </ul>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Car } from 'src/app/models/car';
 import { Color } from 'src/app/models/color';
 import { ColorService } from 'src/app/services/color.service';
 
@@ -9,9 +10,13 @@ import { ColorService } from 'src/app/services/color.service';
 })
 export class ColorComponent implements OnInit {
   colors: Color[] = [];
+  carss:Car[]=[];
   currentColor:Color;
+  nullColor:Color;
   dataLoaded = false;
-  filterText = '';
+  filterColorText = '';
+  colorId : number;
+  brandId:number;
 
   constructor(private colorService: ColorService) {}
 
@@ -43,4 +48,8 @@ export class ColorComponent implements OnInit {
       return "list-group-item"
     }
   }
+  currentResetter(nullColor:Color){
+    this.currentColor=nullColor;
+ }
+
 }
