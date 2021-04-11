@@ -2,17 +2,17 @@
   <li class="list-group-item bg-dark text-light list-group-item-action">Renkler</li>
 
   <div class="mb-1">
-    <label for="filterText" class="form-label"></label>
-    <input type="text" [(ngModel)]="filterColorText" class="form-control" id="filterText" placeholder="renk ara">
+    <!-- <label for="filterText" class="form-label"></label> -->
+    <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="renk ara">
   </div>
-  <div *ngIf="filterColorText" class="alert alert-success">
-    {{filterColorText}} aradınız
+  <div *ngIf="filterText" class="alert alert-success">
+    {{filterText}} aradınız
   </div>
   <li class="list-group-item-secondary mb-1" [class]="getAllColorClass()" routerLink="/cars">
     Tüm Arabalar
   </li>
   <li (click)="setCurrentColor(color)" routerLink="/cars/colors/{{color.colorId}}"
-    *ngFor="let color of colors  |filterColor:filterColorText" [class]="getCurrentColorClass(color)"
+    *ngFor="let color of colors  |filterColor:filterText" [class]="getCurrentColorClass(color)"
     class="list-group-item-secondary mb-1">
     {{ color.colorName }}
   </li>

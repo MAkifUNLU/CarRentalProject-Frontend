@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NaviComponent implements OnInit {
 
+  imageUrl = "https://localhost:44325/Images/"
+  defaultImage="logo.jpg";
+
   constructor() { }
 
   ngOnInit(): void {

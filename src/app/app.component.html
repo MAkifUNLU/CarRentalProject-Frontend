@@ -49,17 +49,31 @@
 
   <div class="container">
     <app-navi></app-navi>
+   <!-- <app-customer></app-customer> -->
     <div class="row">
       <div class="col-md-2">
-        <!-- <div class="mt-5"> -->
+         <div class="mt-5">
            <app-brand></app-brand> 
-        <!-- </div> -->
+       </div> 
       </div>
       <div class="col-md-8">
         <router-outlet></router-outlet> 
       </div>
       <div class="col-md-2">
-        <app-color></app-color>
+        <div class="mt-5">
+          <app-color></app-color>
+        </div>       
       </div>
     </div>
-  </div>
+    <footer class="footer bg-info text-light text-center pb-2 pt-2">
+      <p>Mehmet Akif ÜNLÜ© 2021 Tüm Hakları Saklıdır.</p>
+    </footer>
+  </div> 
+
+    
+<!-- <app-navi></app-navi>
+<div class="container">
+
+  <router-outlet></router-outlet>
+
+</div> -->

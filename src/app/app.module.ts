@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from "@angular/platform-browser";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule,ReactiveFormsModule } from '@angular/forms'
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 
@@ -25,6 +25,13 @@ import { BrandAddComponent } from './components/brand-add/brand-add.component';
 import { ColorListComponent } from './components/color-list/color-list.component';
 import { ColorAddComponent } from './components/color-add/color-add.component';
 import { CarAddComponent } from './components/car-add/car-add.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AuthMenuComponent } from './components/navi/auth-menu/auth-menu.component';
+import { CardSavedComponent } from './components/payment/card-saved/card-saved.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { RegisterComponent } from './components/register/register.component';
+
 
 
 @NgModule({
@@ -46,6 +53,13 @@ import { CarAddComponent } from './components/car-add/car-add.component';
     ColorListComponent,
     ColorAddComponent,
     CarAddComponent,
+    LoginComponent,
+    AuthMenuComponent,
+    CardSavedComponent,
+    ProfileComponent,
+    RegisterComponent,
+
+  
    
   ],
   imports: [
@@ -60,6 +74,7 @@ import { CarAddComponent } from './components/car-add/car-add.component';
     })
   ],
   providers: [
+    {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},
     DatePipe,
   ],
   

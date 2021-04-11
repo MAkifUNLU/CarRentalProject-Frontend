@@ -189,13 +189,14 @@
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title" id="exampleModalLabel">
-        {{ car?.brandName }} - {{ car?.colorName }} | Aracı Kirala
+        {{ car?.brandName }} - {{ car?.colorName }} | Aracı Kirala {{car?.id}}
       </h5>
       <button
         type="button"
         class="btn-close"
         data-bs-dismiss="modal"
         aria-label="Close"
+        routerLink="/cars"
       ></button>
     </div>
     <div class="modal-body">
@@ -261,23 +262,47 @@
             placeholder="Bir gün seçiniz."
           />
         </div>
-      </div>
-      
-      <div class="form-group row mb-2">
-        <label for="example-date-input" class="col-4 col-form-label"
-          >Toplam Fiyat</label
-        >
-         <div class="col-8">
-          <input
-            type="text"
-            disabled="disabled"
-            class="form-control"
-          [value]="car?.dailyPrice | currency: '₺'"
-          /> 
-        </div> 
-      </div> 
+      </div>   
+     
     </div>
-    <div class="modal-footer">
+
+    <div *ngIf="isLogin()">
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" routerLink="/cars">
+          Vazgeç
+        </button>
+        <button *ngIf="isLogin()"
+          data-bs-dismiss="modal"
+          (click)="checkFindexPoint()"
+          type="button"
+          class="btn btn-success"
+        >
+          Kirala
+        </button>
+      </div>
+    </div>
+    <div *ngIf="!isLogin()">
+      <div class="alert alert-secondary text-center lead fw-normal">
+        Araba kiralamak için önce giriş yapmalısınız
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" routerLink="/cars">
+          Vazgeç
+        </button>
+        <button 
+          data-bs-dismiss="modal"
+          disabled="disabled"
+          type="button"
+          class="btn btn-success"
+        >
+          Kirala
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+    <!-- <div class="modal-footer">
       <button routerLink="/cars" type="button" class="btn btn-success" data-bs-dismiss="modal">Ana Sayfaya
         Dön</button>
       
@@ -291,4 +316,4 @@
       </button>
     </div>
   </div>
-</div>
+</div> -->

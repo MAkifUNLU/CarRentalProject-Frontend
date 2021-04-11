@@ -1,9 +1,14 @@
-<table class="table">
+<h2 class="text-center">Müşteri Listesi</h2>
+<div *ngIf="dataLoaded==false" class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+<table *ngIf="dataLoaded==true" class="table">
     <thead>
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Kullanıcı  Id</th>
         <th scope="col">Şirket Adı</th> 
+        <th>Findex Puanı</th>
       </tr>
     </thead>
     <tbody>
@@ -11,6 +16,7 @@
         <td>{{customer.customerId}}</td>
         <td>{{customer.userId}}</td>
         <td>{{customer.companyName}}</td>  
+        <td>{{customer.findexPoint}}</td>
       </tr>
     </tbody>
   </table>

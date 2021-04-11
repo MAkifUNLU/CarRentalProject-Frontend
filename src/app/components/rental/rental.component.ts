@@ -159,8 +159,10 @@ import { CarDetail } from 'src/app/models/carDetail';
 import { CarImage } from 'src/app/models/carImage';
 import { Customer } from 'src/app/models/customer';
 import { Rental } from 'src/app/models/rental';
+import { AuthService } from 'src/app/services/auth.service';
 import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { RentalService } from 'src/app/services/rental.service';
 
 @Component({
@@ -195,7 +197,9 @@ export class RentalComponent implements OnInit {
     private router: Router,
     private datePipe: DatePipe,
     private carService: CarService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,
+    private authService:AuthService,
+    private localStorageService:LocalStorageService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -225,6 +229,7 @@ export class RentalComponent implements OnInit {
   getCars(carId: number) {
     this.carService.getCarDetailByCarId(carId).subscribe(response => {
       this.car = response.data[0]
+
     })
   }
 
@@ -250,7 +255,7 @@ export class RentalComponent implements OnInit {
 
   createRental() {
     let createdRental: Rental = {
-      carId: this.car.id,
+      carId: this.car.carId,
       brandName: this.car.brandName,
       colorName: this.car.colorName,
       carModelYear: this.car.modelYear,
@@ -298,4 +303,29 @@ export class RentalComponent implements OnInit {
     this.firstDateSelected = true;
   }
 
+  isLogin(){
+    if(this.authService.isAuthenticated()){
+      return true;
+    }
+    return false;
+  }
+
+  checkFindexPoint(){
+    this.carService.getCarDetailByCarId(this.carId).subscribe(response => {
+      
+      let customer = this.localStorageService.getCurrentCustomer();
+
+      if(customer.findexPoint === 0){
+        this.toastrService.warning("Kullanıcının findeks puanı sıfırdır","Dikkat");
+        return  this.router.navigateByUrl("/cars");
+      }
+
+      let car:Car = response.data[0];
+      if(customer.findexPoint < car.findexPoint){
+        this.toastrService.warning("Findeks puanınız yetersiz","Dikkat");
+        return  this.router.navigate(["/cars"]);
+      }
+      return this.checkRentableCar();
+    })
+  }
 }

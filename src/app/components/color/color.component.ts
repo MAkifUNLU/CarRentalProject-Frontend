@@ -14,7 +14,7 @@ export class ColorComponent implements OnInit {
   currentColor:Color;
   nullColor:Color;
   dataLoaded = false;
-  filterColorText = '';
+  filterText = '';
   colorId : number;
   brandId:number;
 

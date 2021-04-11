@@ -29,14 +29,23 @@ export class CreditCardService {
     return this.httpClient.get<ListResponseModel<CreditCard>>(newPath);
   }
 
-  updateCard(creditCard:CreditCard){
+  updateCard(creditCard:CreditCard):Observable<ResponseModel>{
     let newPath = this.apiUrl+"creditcards/update";
-    this.httpClient.put(newPath,creditCard);//neden httpClient.post() kullanmadık?
+    return this.httpClient.post<ResponseModel>(newPath, creditCard);
   }
 
   getAllCard():Observable<ListResponseModel<CreditCard>>{
     let newPath = this.apiUrl+"creditcards/getall";
     return this.httpClient.get<ListResponseModel<CreditCard>>(newPath);
+  }
+  getCardsByCustomerId(customerId:number):Observable<ListResponseModel<CreditCard>>{
+    let newPath = this.apiUrl + "creditcards/getcardsbycustomerid?customerid="+customerId;
+    return this.httpClient.get<ListResponseModel<CreditCard>>(newPath);
+  }
+  
+  add(creditCard:CreditCard):Observable<ResponseModel>{
+    let newPath = this.apiUrl+"creditcards/add";
+    return this.httpClient.post<ResponseModel>(newPath,creditCard);
   }
   
 }
