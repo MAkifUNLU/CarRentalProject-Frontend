@@ -1,0 +1,26 @@
+Projeye yapılacaklar
+1-Eğer bir arabaya ait resim yoksa, default bir resim gösteriniz. Bu resim şirket logonuz olabilir. (Tek elemanlı liste)
+2-[SecuredOperation("brand.add,admin")] deki brand.add leri tek çatıda topla!!! OperationClaim tablosunu update et.(car.admin gibi)
+3-Transactional aspect leri ekle(ICarService ye mesela)
+4-Performans ekleyebilirsin (Stopwatch) --->[PerformanceAspect(5)] gibi
+5-PerformanceAspect bunu Core.Utilities.Interceptors.Aspect.... e eklemeyi sor her yerde performans kontrolü için
+6-ngx-toastr bak google dan değişik şeyler yap
+7-JavaScript map,filter,reduce fonksiyonlarını araştırınız.
+8-Toastr servisleri ekle
+9-Payment-CreditCard düzenlemesi yap
+10-Seat ı ekleyince her yerde görünmeli
+CREATE TABLE [dbo].[Rentals] (
+    [RentalId]   INT      IDENTITY (1, 1) NOT NULL,
+    [CarId]      INT      NULL,
+    [CustomerId] INT      NULL,
+    [RentDate]   DATETIME NULL,
+    [ReturnDate] DATETIME NULL,
+    PRIMARY KEY CLUSTERED ([RentalId] ASC),
+    FOREIGN KEY ([CarId]) REFERENCES [dbo].[Cars] ([Id]) ,
+    FOREIGN KEY ([CustomerId]) REFERENCES [dbo].[Customers] ([Id])
+);
+<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
